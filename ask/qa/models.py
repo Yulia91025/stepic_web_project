@@ -10,15 +10,24 @@ class QuestionManager(models.Manager):
 
 class Question(models.Model):
     objects = QuestionManager() 
-    title = models.CharField(max_length = 200)
-    text = models.TextField()
+    title = models.CharField(default='', max_length = 1024)
+    text = models.TextField(default='')
     added_at = models.DateTimeField(auto_now_add=True)
     rating = models.IntegerField(default=0)
     author = models.ForeignKey(User, on_delete = models.CASCADE, related_name="q_to_u")
     likes = models.ManyToManyField(User, related_name="q_to_l")
 
+    def __unicode__(self):
+        return self.title
+    
+    def get_url(self):
+        return '/question/{}/'.format(self.id)
+
 class Answer(models.Model):
-    text = models.TextField()
+    text = models.TextField(default='')
     added_at = models.DateTimeField(auto_now_add=True)
     question = models.ForeignKey(Question, on_delete = models.CASCADE, related_name="a_to_q")
     author = models.ForeignKey(User, on_delete = models.CASCADE, related_name="a_to_u")
+
+    def __unicode__(self):
+        return self.text

@@ -1,0 +1,10 @@
+<div class="pagination">
+	{% for question in questions %}
+	<div>
+		<h3> {{ question.title }} </h3>
+		<p> Author: {{ question.author }}, {{ question.added_at }} </p>
+		<p><a href="{{ question.get_url }}">Go</a></p>
+	</div>
+	<hr>
+	{% endfor %}
+</div>
