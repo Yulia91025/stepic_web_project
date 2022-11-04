@@ -15,8 +15,8 @@ class Question(models.Model):
     text = models.TextField(default='')
     added_at = models.DateTimeField(auto_now_add=True)
     rating = models.IntegerField(default=0)
-    author = models.ForeignKey(User, on_delete = models.CASCADE, related_name="q_to_u")
-    likes = models.ManyToManyField(User, related_name="q_to_l")
+    author = models.ForeignKey(User, on_delete = models.CASCADE)
+    likes = models.ManyToManyField(User)
 
     def __unicode__(self):
         return self.title
@@ -27,8 +27,8 @@ class Question(models.Model):
 class Answer(models.Model):
     text = models.TextField(default='')
     added_at = models.DateTimeField(auto_now_add=True)
-    question = models.ForeignKey(Question, on_delete = models.CASCADE, related_name="a_to_q")
-    author = models.ForeignKey(User, on_delete = models.CASCADE, related_name="a_to_u")
+    question = models.ForeignKey(Question, on_delete = models.CASCADE)
+    author = models.ForeignKey(User, on_delete = models.CASCADE)
 
     def __unicode__(self):
         return self.text
