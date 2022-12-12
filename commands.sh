@@ -1,5 +1,4 @@
 sudo pip3 install --upgrade django
-git clone https://github.com/Yulia91025/stepik_web_project web
 sudo /etc/init.d/mysql start
 mysql -uroot -e "create database web;"
 mysql -uroot -e "create user 'box'@'localhost' identified by '12345';"
